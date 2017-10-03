@@ -1,4 +1,5 @@
 import _assign from 'lodash/assign';
+import _cloneDeep from 'lodash/cloneDeep';
 import _map from 'lodash/map';
 import _isEqual from 'lodash/isEqual';
 import _sortBy from 'lodash/sortBy';
@@ -304,7 +305,7 @@ class DbCollection {
    * @private
    */
   _insertRecord(data) {
-    let attrs = duplicate(data);
+    let attrs = _cloneDeep(data);
 
     if (attrs && (attrs.id === undefined || attrs.id === null)) {
       attrs.id = this.identityManager.fetch(attrs);
@@ -316,7 +317,7 @@ class DbCollection {
 
     this._records.push(attrs);
 
-    return duplicate(attrs);
+    return _cloneDeep(attrs);
   }
 
   /**
